@@ -16,9 +16,9 @@ podTemplate(containers: [
                     dir('time-service') {
                       sh "sed -i '14s/#//' /etc/default/docker"
                       sh "cat /etc/default/docker"
-                      //sh "service docker restart"
+                      sh "service docker restart"
                       sh 'ping -c 3 github.com'
-                      sh "docker build -t ishais/time-service:${GIT_TAG} ."
+                      //sh "docker build -t ishais/time-service:${GIT_TAG} ."
                     }
                 }
                 else{
