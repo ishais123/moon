@@ -12,7 +12,7 @@ podTemplate(containers: [
         container('build') {
             stage('build') {
                 sh "ls -la"
-                GIT_TAG = sh(returnStdout: true, script: "git tag --contains | head 1").trim()
+                GIT_TAG = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                 if ( GIT_TAG ){
                     sh "docker build -f time-service/Dockerfile -t ishais/time-service:${GIT_TAG}"
                 }
