@@ -25,7 +25,7 @@ podTemplate(containers: [
                 }
                 else{
                     dir('time-service') {
-                      sh "sed -i '14s/#//' /etc/default/docker"
+                      //sh "sed -i '14s/#//' /etc/default/docker"
                       sh 'ping -c 3 github.com'
                       sh 'ping -c 3 8.8.8.8'
                       sh "docker build -t ishais/time-service:latest ."
