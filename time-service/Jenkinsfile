@@ -22,16 +22,16 @@ podTemplate(containers: [
                         sh "docker login -u='${USERNAME}' -p='${PASSWORD}'"
                         sh "docker push ishais/time-service:${GIT_TAG}"
                       }
-                      //sh "docker login -u='${DOCKERHUB_CRED_USR}' -p='${DOCKERHUB_CRED_PWD}'"
-                      //sh "docker push ishais/time-service:${GIT_TAG}"
                     }
                 }
                 else{
                     dir('time-service') {
                       sh "curl -sSL https://get.docker.com/ | sh"
                       sh "docker build --network host -t ishais/time-service:${GIT_TAG} ."
-                      sh "docker login -u='${DOCKERHUB_CRED_USR}' -p='${DOCKERHUB_CRED_PWD}'"
-                      sh "docker push ishais/time-service:${GIT_TAG}"
+                      withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh "docker login -u='${USERNAME}' -p='${PASSWORD}'"
+                        sh "docker push ishais/time-service:latest"
+                      }
                     }
                 }
                 sh "docker images"
