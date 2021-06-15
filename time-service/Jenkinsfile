@@ -21,8 +21,9 @@ podTemplate(containers: [
                     dir('time-service') {
                       sh "curl -sSL https://get.docker.com/ | sh"
                       sh "docker build --network host -t ishais/time-service:${GIT_TAG} ."
-                      sh "docker login -u='${DOCKERHUB_CRED_USR}' -p='${DOCKERHUB_CRED_PWD}'"
-                      sh "docker push ishais/time-service:${GIT_TAG}"
+                      sh "echo ${DOCKERHUB_CRED}"
+                      //sh "docker login -u='${DOCKERHUB_CRED_USR}' -p='${DOCKERHUB_CRED_PWD}'"
+                      //sh "docker push ishais/time-service:${GIT_TAG}"
                     }
                 }
                 else{
