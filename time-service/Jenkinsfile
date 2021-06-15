@@ -1,6 +1,6 @@
 podTemplate(containers: [
      containerTemplate(name: 'deploy', image: 'dtzar/helm-kubectl', ttyEnabled: true, command: 'sleep 100000000000'),
-     containerTemplate(name: 'build', image: 'python:3', ttyEnabled: true, command: 'sleep 100000000000')
+     containerTemplate(name: 'build', image: 'docker', ttyEnabled: true, command: 'sleep 100000000000')
   ],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')] )
   {
@@ -16,7 +16,7 @@ podTemplate(containers: [
 
                 if ( GIT_TAG ){
                     dir('time-service') {
-                      sh "curl -sSL https://get.docker.com/ | sh"
+                      // sh "curl -sSL https://get.docker.com/ | sh"
                       sh "docker build --network host -t ishais/time-service:${GIT_TAG} ."
                       withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "docker login -u='${USERNAME}' -p='${PASSWORD}'"
