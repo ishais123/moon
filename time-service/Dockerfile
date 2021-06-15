@@ -7,6 +7,7 @@ COPY requirements.txt ./
 RUN cat /etc/resolv.conf
 
 RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
+    service networking restart && \
     pip install --no-cache-dir -r requirements.txt
 
 
