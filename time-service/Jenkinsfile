@@ -15,17 +15,17 @@ podTemplate(containers: [
                 if ( GIT_TAG ){
                     dir('time-service') {
                       sh "echo nameserver 8.8.8.8 > /etc/resolv.conf"
-                      sh 'ping github.com'
-                      sh 'ping 8.8.8.8'
-                      //sh "docker build -t ishais/time-service:${GIT_TAG} ."
+                      sh 'ping -c 3 github.com'
+                      sh 'ping -c 3 8.8.8.8'
+                      sh "docker build -t ishais/time-service:${GIT_TAG} ."
                     }
                 }
                 else{
                     dir('time-service') {
                       sh "echo nameserver 8.8.8.8 > /etc/resolv.conf"
-                      sh 'ping github.com'
-                      sh 'ping 8.8.8.8'
-                      //sh "docker build -t ishais/time-service:latest ."
+                      sh 'ping -c 3 github.com'
+                      sh 'ping -c 3 8.8.8.8'
+                      sh "docker build -t ishais/time-service:latest ."
                     }
                 }
                 sh "docker images"
