@@ -14,7 +14,10 @@ podTemplate(containers: [
                 GIT_TAG = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                 if ( GIT_TAG ){
                     dir('time-service') {
+                      sh "# Docker Upstart and SysVinit configuration file' >> /etc/default/docker"
+                      sh "# Customize location of Docker binary (especially for development testing)."
                       sh "echo DOCKER='/usr/bin/docker' >> /etc/default/docker"
+                      sh "# Use DOCKER_OPTS to modify the daemon startup options."
                       sh "echo DOCKER_OPTS='--dns 8.8.8.8' >> /etc/default/docker"
                       sh "service docker restart"
                       sh 'ping -c 3 github.com'
