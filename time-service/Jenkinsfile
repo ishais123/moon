@@ -1,6 +1,6 @@
 podTemplate(containers: [
      containerTemplate(name: 'deploy', image: 'dtzar/helm-kubectl', ttyEnabled: true, command: 'sleep 100000000000'),
-     containerTemplate(name: 'build', image: 'docker', ttyEnabled: true, command: 'sleep 100000000000')
+     containerTemplate(name: 'build', image: 'ishais/jenkins:latest', ttyEnabled: true, command: 'sleep 100000000000')
   ],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')] )
   {
@@ -16,10 +16,7 @@ podTemplate(containers: [
 
                 if ( GIT_TAG ){
                     dir('time-service') {
-                      //sh "sed -i '14s/#//' /etc/default/docker"
-                      //sh "cat /etc/default/docker"
-                      //sh "service docker restart"
-                      //sh 'ping -c 3 github.com'
+
                       sh "docker build -t ishais/time-service:${GIT_TAG} ."
                     }
                 }
