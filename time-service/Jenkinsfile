@@ -18,6 +18,7 @@ podTemplate(containers: [
                     dir('time-service') {
                       sh "curl -sSL https://get.docker.com/ | sh"
                       sh "docker build --network host -t ishais/time-service:${GIT_TAG} ."
+                      sh "docker push ishais/time-service:${GIT_TAG}"
                     }
                 }
                 else{
