@@ -14,6 +14,8 @@ podTemplate(containers: [
                 GIT_TAG = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                 if ( GIT_TAG ){
                     dir('time-service') {
+                      sh 'ping ynet.co.il'
+                      sh 'ping 8.8.8.8'
                       sh "docker build -t ishais/time-service:${GIT_TAG} ."
                     }
                 }
