@@ -19,7 +19,7 @@ podTemplate(containers: [
                       //sh "sed -i '14s/#//' /etc/default/docker"
                       //sh "cat /etc/default/docker"
                       //sh "service docker restart"
-                      sh 'ping -c 3 github.com'
+                      //sh 'ping -c 3 github.com'
                       sh "docker build -t ishais/time-service:${GIT_TAG} ."
                     }
                 }
